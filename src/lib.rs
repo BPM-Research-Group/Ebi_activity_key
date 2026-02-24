@@ -9,3 +9,6 @@ pub use activity_key::ActivityKey;
 pub use activity_key_translator::ActivityKeyTranslator;
 pub use has_activity_key::HasActivityKey;
 pub use translate_activity_key::TranslateActivityKey;
+
+#[cfg(any(test, feature = "testactivities"))]
+pub use has_activity_key::TestActivityKey;
