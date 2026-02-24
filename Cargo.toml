@@ -1,0 +1,34 @@
+[package]
+name = "ebi_activity_key"
+version = "0.0.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+keywords = ["stochastic-processes", "process-mining", "business-processes"]
+categories = ["command-line-utilities"]
+description = "String de-duplication for Ebi - a stochastic process mining utility"
+homepage = "https://ebitools.org"
+repository = "https://github.com/BPM-Research-Group/Ebi_objects"
+readme = "README.md"
+exclude = ["/testfiles", "/manual", ".github/", ".*"]
+
+[lib]
+name = "ebi_activity_key"
+crate-type = ["cdylib", "lib"]
+
+[features]
+default = [ ]
+testactivities = []
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+uuid = {version = "1.21.0", features=["v4"]}
+intmap = "3.1.3"
+
+[profile.release]
+debug = false
+strip = true
+panic = 'abort'
+opt-level = 3
+lto = true
+codegen-units = 1
