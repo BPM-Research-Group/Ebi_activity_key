@@ -20,6 +20,10 @@ impl ActivityKeyTranslator {
         self.from2to[activity.id]
     }
 
+    pub fn translate_activity_mut(&self, activity: &mut Activity) {
+        *activity = self.from2to[activity.id]
+    }
+
     pub fn translate_trace(&self, trace: &Vec<Activity>) -> Vec<Activity> {
         let mut result = Vec::with_capacity(trace.len());
         for from in trace {
