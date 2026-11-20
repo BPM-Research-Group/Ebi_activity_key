@@ -9,11 +9,11 @@ impl ActivityKeyTranslator {
         let mut from2to = vec![];
 
         for label_from in &from.activity2name {
-            let index_to = to.process_activity(&label_from);
+            let index_to = to.process_activity(label_from);
             from2to.push(index_to);
         }
 
-        Self { from2to: from2to }
+        Self { from2to }
     }
 
     pub fn translate_activity(&self, activity: &Activity) -> Activity {
@@ -32,7 +32,7 @@ impl ActivityKeyTranslator {
         result
     }
 
-    pub fn translate_trace_mut(&self, trace: &mut Vec<Activity>) {
+    pub fn translate_trace_mut(&self, trace: &mut [Activity]) {
         trace
             .iter_mut()
             .for_each(|event| *event = self.translate_activity(event));

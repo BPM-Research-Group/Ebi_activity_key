@@ -1,11 +1,10 @@
 use intmap::IntKey;
-#[cfg(any(test, feature = "testactivities"))]
-use uuid::Uuid;
-
 use std::{
     fmt::{Debug, Display},
     hash::Hash,
 };
+#[cfg(any(test, feature = "testactivities"))]
+use uuid::Uuid;
 
 #[derive(Clone, Copy, Ord, Eq, PartialEq, PartialOrd)]
 #[cfg(not(any(test, feature = "testactivities")))]
@@ -87,11 +86,6 @@ impl Ord for Activity {
 #[cfg(any(test, feature = "testactivities"))]
 impl PartialOrd for Activity {
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
-        assert!(
-            self.activity_key_uuid == other.activity_key_uuid,
-            "cannot compare activities of different activity keys"
-        );
-
-        self.id.partial_cmp(&other.id)
+        Some(self.cmp(other))
     }
 }
