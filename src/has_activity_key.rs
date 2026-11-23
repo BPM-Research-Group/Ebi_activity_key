@@ -5,6 +5,8 @@ pub trait HasActivityKey: TranslateActivityKey + TestActivityKey {
     fn activity_key(&self) -> &ActivityKey;
 
     fn activity_key_mut(&mut self) -> &mut ActivityKey;
+
+    fn take_activity_key(self) -> ActivityKey;
 }
 
 #[cfg(not(test))]
@@ -12,6 +14,8 @@ pub trait HasActivityKey: TranslateActivityKey {
     fn activity_key(&self) -> &ActivityKey;
 
     fn activity_key_mut(&mut self) -> &mut ActivityKey;
+
+    fn take_activity_key(self) -> ActivityKey;
 }
 
 #[cfg(any(test, feature = "testactivities"))]
